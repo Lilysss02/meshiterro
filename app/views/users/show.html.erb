@@ -1,0 +1,14 @@
+<!--- ユーザのプロフィール --->
+<div class="profile-container">
+    <h3 class="profile-name"><%= @user.name %></h3>
+    <!--- attachment_image_tagをしようしてプロフィール画像を表示している --->
+    <!--- @userの部分には画像を格納しているカラムを持つインスタンスを入れる --->
+    <!--- :profile_imageの部分では画像が格納されているカラムを指定 --->
+    <!--- :fillは縦横の大きさを指定、format:は画像の拡張子の指定、class:はhtmlのclassをrailsのタグ用に記述、fallback:は画像データがカラムにない場合に表示される画像を指定 --->
+    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "image-circle pull-left profile-img", fallback: "no_image.jpg" %>
+    <% if @user.id == current_user.id %>
+    <p> <%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
+    <% end %>
+</div>
+
+<%= render 'post_images/list', post_images: @post_images %>
